@@ -80,11 +80,22 @@ if (Test-Path $releasesDir) {
     New-Item -ItemType Directory -Path $releasesDir -Force > $null
 }
 
+# Archivos base a empaquetar
+$baseItems = @(
+    (Join-Path $scriptDir "SKILL.md"),
+    (Join-Path $scriptDir "README.md"),
+    (Join-Path $scriptDir "LICENSE"),
+    (Join-Path $scriptDir "scripts")
+)
+$templatesDir = Join-Path $scriptDir "templates"
+if (Test-Path $templatesDir) { $baseItems += $templatesDir }
+
 # PUBLIC
 Write-Host "`nConstruyendo PUBLICO..." -ForegroundColor Green
 $temp = "$env:TEMP\skill-pub-$([System.Random]::new().Next())"
 New-Item -ItemType Directory -Path $temp -Force > $null
-Copy-Item -Path (Join-Path $scriptDir "SKILL.md"),(Join-Path $scriptDir "README.md"),(Join-Path $scriptDir "LICENSE"),(Join-Path $scriptDir ".env.example"),(Join-Path $scriptDir "scripts") -Destination $temp -Recurse -Force
+$publicItems = $baseItems + @((Join-Path $scriptDir ".env.example"))
+Copy-Item -Path $publicItems -Destination $temp -Recurse -Force
 $publicZip = Join-Path $releasesDir "$skillName-v${version}-public.zip"
 New-UnixZip -SourceDir $temp -ZipPath $publicZip
 Remove-Item -Path $temp -Recurse -Force
@@ -94,7 +105,7 @@ Write-Host "   OK $publicZip" -ForegroundColor Green
 Write-Host "`nConstruyendo PRIVADO..." -ForegroundColor Green
 $temp = "$env:TEMP\skill-priv-$([System.Random]::new().Next())"
 New-Item -ItemType Directory -Path $temp -Force > $null
-Copy-Item -Path (Join-Path $scriptDir "SKILL.md"),(Join-Path $scriptDir "README.md"),(Join-Path $scriptDir "LICENSE"),(Join-Path $scriptDir "scripts") -Destination $temp -Recurse -Force
+Copy-Item -Path $baseItems -Destination $temp -Recurse -Force
 Copy-Item -Path $envFile -Destination (Join-Path $temp ".env") -Force
 $privateZip = Join-Path $parentDir "$skillName-v${version}-private.zip"
 New-UnixZip -SourceDir $temp -ZipPath $privateZip
