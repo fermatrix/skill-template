@@ -23,10 +23,10 @@
 #     scripts/
 #     releases_public/        ← created automatically, tracked by git
 #     releases_private/       ← created automatically, gitignored
-#       skill-{name}.env      ← credentials source (place manually, never commit)
+#       .env                  ← credentials source (place manually, never commit)
 #
 # ENV FILE CONVENTION
-#   File location : releases_private/skill-{name}.env
+#   File location : releases_private/.env
 #   Variable pattern: {SKILL}_{CLIENT}_{VARNAME}
 #
 #   The prefix is derived from the folder name automatically:
@@ -34,14 +34,14 @@
 #     skill-odoo     → ODOO_
 #     skill-mailgun  → MAILGUN_
 #
-#   Example — skill-holded/releases_private/skill-holded.env:
+#   Example — skill-holded/releases_private/.env:
 #     HOLDED_SPIRAL_API_KEY=abc123
 #     HOLDED_REALFLOOW_API_KEY=def456
 #   → Generates:
 #     skill-holded-v1.0.0_SPIRAL.zip    (contains only HOLDED_SPIRAL_* vars)
 #     skill-holded-v1.0.0_REALFLOOW.zip (contains only HOLDED_REALFLOOW_* vars)
 #
-#   Example — skill-odoo/releases_private/skill-odoo.env:
+#   Example — skill-odoo/releases_private/.env:
 #     ODOO_ENZO_URL=https://enzo.odoo.com
 #     ODOO_ENZO_DB=enzo
 #     ODOO_ENZO_USER=admin@enzo.com
@@ -113,9 +113,9 @@ foreach ($file in $requiredFiles) {
 }
 
 # El .env debe estar en releases_private/ (gitignoreado, nunca en el repo)
-$envFile = Join-Path $distPrivateDir "$skillName.env"
+$envFile = Join-Path $distPrivateDir ".env"
 if (-not (Test-Path $envFile)) {
-    Write-Host "Falta: $skillName.env en releases_private/" -ForegroundColor Red
+    Write-Host "Falta: .env en releases_private/" -ForegroundColor Red
     Write-Host "Crea el fichero con tus credenciales antes de hacer el build." -ForegroundColor Yellow
     exit 1
 }
