@@ -42,17 +42,17 @@
 #     skill-holded-v1.0.0_REALFLOOW.zip (contains only HOLDED_REALFLOOW_* vars)
 #
 #   Example — skill-odoo/releases_private/.env:
-#     ODOO_ENZO_URL=https://enzo.odoo.com
-#     ODOO_ENZO_DB=enzo
-#     ODOO_ENZO_USER=admin@enzo.com
-#     ODOO_ENZO_APIKEY=abc123
-#     ODOO_RENTBUY_URL=https://rentbuy.odoo.com
-#     ODOO_RENTBUY_DB=rentbuy
-#     ODOO_RENTBUY_USER=admin@rentbuy.com
-#     ODOO_RENTBUY_APIKEY=def456
+#     ODOO_CLIENT1_URL=https://client1.odoo.com
+#     ODOO_CLIENT1_DB=client1
+#     ODOO_CLIENT1_USER=admin@client1.com
+#     ODOO_CLIENT1_APIKEY=abc123
+#     ODOO_CLIENT2_URL=https://client2.odoo.com
+#     ODOO_CLIENT2_DB=client2
+#     ODOO_CLIENT2_USER=admin@client2.com
+#     ODOO_CLIENT2_APIKEY=def456
 #   → Generates:
-#     skill-odoo-v1.0.0_ENZO.zip     (ODOO_ENZO_URL + DB + USER + APIKEY)
-#     skill-odoo-v1.0.0_RENTBUY.zip  (ODOO_RENTBUY_URL + DB + USER + APIKEY)
+#     skill-odoo-v1.0.0_CLIENT1.zip     (ODOO_CLIENT1_URL + DB + USER + APIKEY)
+#     skill-odoo-v1.0.0_CLIENT2.zip  (ODOO_CLIENT2_URL + DB + USER + APIKEY)
 #
 # ADDING A NEW CLIENT
 #   Add their variables to releases_private/skill-{name}.env and re-run.

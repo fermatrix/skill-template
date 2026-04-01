@@ -46,3 +46,7 @@ MIT
 
 **Maintainer:** Fermatrix
 **Repository:** https://github.com/fermatrix/[repo-name]
+
+## Changes (2026-04-01)
+
+- Example credentials updated to placeholders only
